@@ -1,4 +1,4 @@
-import { AbsoluteCenter, Box, Heading, Card, Image, Text } from "@chakra-ui/react"
+import { AbsoluteCenter, Box, Heading, Card } from "@chakra-ui/react"
 import { keyframes } from "@emotion/react"
 
 const floatAnim = keyframes`
