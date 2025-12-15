@@ -1,9 +1,9 @@
-import HifzCard from "@/components/ui/hifzcard"
+import QuranPage from "./components/quran/page"
 
 function App() {
 	return (
 		<>
-			<HifzCard/>
+			<QuranPage/>
 		</>
 	)
 }
