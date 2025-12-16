@@ -64,8 +64,9 @@ function SurahNavigator() {
                 </Button>
             </Flex>
             <Stack gap={0}>
-                {surahs.map((surah) => (
+                {surahs.map((surah, idx) => (
                     <Box
+                        key={idx}
                         p={3}
                         h="100%"
                         borderBottomWidth={1}
