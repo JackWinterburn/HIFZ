@@ -42,7 +42,7 @@ function QuranPage() {
                     >
                         All Surahs
                     </Button>
-                    <Heading size="4xl">{surahs.find(surah => surah.number === currentSurah)?.name}</Heading>
+                    <Heading size="4xl">{surahs.find(surah => surah.number === currentSurah)?.surahName}</Heading>
 
                     {/* Dummy just used for spacing */}
                     <Button

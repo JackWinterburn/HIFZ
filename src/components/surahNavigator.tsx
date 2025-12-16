@@ -16,7 +16,11 @@ function SurahNavigator() {
         async function loadSurahs() {
             const response = await getSurahs();
             console.log(response);
-            setSurahs(response.data.surahs.references);
+            let s = response;
+            s.forEach((surah: any, idx: number) => {
+                surah.number = idx + 1;
+            })
+            setSurahs(s);
         }
         loadSurahs();
     }, []);
@@ -80,7 +84,7 @@ function SurahNavigator() {
                             cursor: "pointer",
                         }}
                     >
-                        <Text>{surah.englishName}</Text>
+                        <Text>{surah.surahName}</Text>
                     </Box>
                 ))}
             </Stack>
