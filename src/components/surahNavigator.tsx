@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect } from "react";
+import { useLayoutEffect } from "react";
 import { getSurahs } from "@/api/getSurahs";
 import { surahsState } from "@/atoms/surahsState";
 import { currentSurahAtom, showSurahNavigatorAtom } from "@/atoms/surahNavigatorState";

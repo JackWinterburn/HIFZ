@@ -1,4 +1,4 @@
-import { Box, Heading, Card, Button, Flex } from "@chakra-ui/react";
+import { Box, Heading, Card, Button } from "@chakra-ui/react";
 import { useAtom } from "jotai";
 import { currentQuranPageAtom } from "@/atoms/quranState";
 import { currentSurahAtom, showSurahNavigatorAtom } from "@/atoms/surahNavigatorState";
