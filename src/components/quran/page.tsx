@@ -1,7 +1,6 @@
 import { useLayoutEffect } from "react";
 import { Box, Heading, Card, Button } from "@chakra-ui/react";
 import { useAtom } from "jotai";
-import { currentQuranPageAtom } from "@/atoms/quranState";
 import { currentSurahAtom, showSurahNavigatorAtom } from "@/atoms/surahNavigatorState";
 import { surahsState } from "@/atoms/surahsState";
 import { ayatAtom } from "@/atoms/ayatState";
@@ -11,7 +10,6 @@ import type { ayahType } from "@/types/ayah";
 
 
 function QuranPage() {
-    const [currentQuranPage, ] = useAtom(currentQuranPageAtom);
     const [currentSurah, ] = useAtom(currentSurahAtom);
     const [showSurahNavigator, setShowSurahNavigator] = useAtom(
         showSurahNavigatorAtom
