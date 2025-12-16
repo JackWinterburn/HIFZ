@@ -71,7 +71,7 @@ function SurahNavigator() {
                 {surahs.map((surah, idx) => (
                     <Box
                         key={idx}
-                        p={3}
+                        p={6}
                         h="100%"
                         borderBottomWidth={1}
                         transition={"all 0.1s ease"}
@@ -84,7 +84,7 @@ function SurahNavigator() {
                             cursor: "pointer",
                         }}
                     >
-                        <Text>{surah.surahName}</Text>
+                        <Text>{surah.number}. {surah.surahName}</Text>
                     </Box>
                 ))}
             </Stack>

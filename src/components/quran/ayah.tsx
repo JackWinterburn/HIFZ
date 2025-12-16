@@ -3,6 +3,8 @@ import { type AyahType } from "@/types/quranPage";
 import { LocaleProvider } from "@chakra-ui/react";
 
 function Ayah({ arabicText, latinText, ayahNumber }: AyahType) {
+
+        
     return (
     <Box p={4} mb={6} borderBottomWidth={1} transition={"all 0.1s ease"} _hover={{"backgroundColor": "#0000000b", "cursor": "pointer"}}>
         <Stack>

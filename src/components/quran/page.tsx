@@ -1,9 +1,14 @@
+import { useLayoutEffect } from "react";
 import { Box, Heading, Card, Button } from "@chakra-ui/react";
 import { useAtom } from "jotai";
 import { currentQuranPageAtom } from "@/atoms/quranState";
 import { currentSurahAtom, showSurahNavigatorAtom } from "@/atoms/surahNavigatorState";
 import { surahsState } from "@/atoms/surahsState";
+import { ayatAtom } from "@/atoms/ayatState";
+import { getAyat } from "@/api/getAyat";
 import Ayah from "./ayah";
+import type { ayahType } from "@/types/ayah";
+
 
 function QuranPage() {
     const [currentQuranPage, ] = useAtom(currentQuranPageAtom);
@@ -12,6 +17,19 @@ function QuranPage() {
         showSurahNavigatorAtom
     );
     const [surahs, ] = useAtom(surahsState);
+    const [ayat, setAyat] = useAtom(ayatAtom);
+
+    const loadSurah = async () => {
+        const response = await getAyat(currentSurah);
+        setAyat(response);
+    }
+        
+    useLayoutEffect(() => {
+        loadSurah();
+    }, [currentSurah]);
+
+    console.log(ayat);
+
     return (
         <Box justifyContent={"center"} display="flex">
             <Card.Root
@@ -55,7 +73,7 @@ function QuranPage() {
                 </Card.Header>
 
                 <Card.Body>
-                    {currentQuranPage.ayahs.map((ayah) => (
+                    {ayat.map((ayah: ayahType) => (
                         <Ayah
                             key={ayah.ayahNumber}
                             arabicText={ayah.arabicText}
