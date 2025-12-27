@@ -8,7 +8,6 @@ import { getAyat } from "@/api/getAyat";
 import Ayah from "./ayah";
 import type { ayahType } from "@/types/ayah";
 
-
 function QuranPage() {
     const [currentSurah, ] = useAtom(currentSurahAtom);
     const [showSurahNavigator, setShowSurahNavigator] = useAtom(
@@ -58,7 +57,7 @@ function QuranPage() {
                     >
                         All Surahs
                     </Button>
-                    <Heading size="4xl">{surahs.find(surah => surah.number === currentSurah)?.surahName}</Heading>
+                    <Heading size="4xl">{surahs.find(surah => surah.number === currentSurah)?.surahNameArabic}</Heading>
 
                     {/* Dummy just used for spacing */}
                     <Button
@@ -77,6 +76,7 @@ function QuranPage() {
                             arabicText={ayah.arabicText}
                             latinText={ayah.latinText}
                             ayahNumber={ayah.ayahNumber}
+                            surahNumber={currentSurah}
                         />
                     ))}
                 </Card.Body>
