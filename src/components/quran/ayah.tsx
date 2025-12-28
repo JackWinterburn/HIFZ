@@ -23,7 +23,11 @@ function Ayah({ arabicText, latinText, ayahNumber, surahNumber }: AyahType) {
             _hover={{ backgroundColor: hoverBgColor, cursor: "pointer" }}
             onClick={() => {
                 if(!Object.keys(memorisedAyat).includes(`${surahNumber}:${ayahNumber}`)) {
-                    setMemorisedAyat({...memorisedAyat, [`${surahNumber}:${ayahNumber}`]: {}});
+                    setMemorisedAyat({...memorisedAyat, [`${surahNumber}:${ayahNumber}`]: {
+                        ayahNumber,
+                        surahNumber,
+                        arabicText
+                    }});
                 } else {
                     setMemorisedAyat((prev: any) => {
                         const updated = {...prev};
