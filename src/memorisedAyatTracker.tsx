@@ -6,7 +6,7 @@ function MemorisedAyatTracker() {
     const [memorisedAyat, ] = useAtom(memorisedAyatAtom);
 
     return (
-        <Box w="100%" h="100vh">
+        <Box w="100%" h="100vh" overflowY={"scroll"} top={0}>
             {/* Memorised Ayat Tracker Component */}
             {Object.entries(memorisedAyat).map(([key, value]) => (
                 <Box key={key}>
