@@ -77,7 +77,10 @@ function SurahNavigator() {
                         transition={"all 0.1s ease"}
                         bgColor={currentSurah === surah.number ? "#00000010" : "transparent"}
                         onClick={() => {
-                            if(surah.number !== currentSurah) setCurrentSurah(surah.number)
+                            if(surah.number !== currentSurah){ 
+                                setCurrentSurah(surah.number)
+                                setShowSurahNavigator(false)
+                            }
                         }}
                         _hover={{
                             backgroundColor: "#0000000b",
