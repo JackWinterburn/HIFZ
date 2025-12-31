@@ -1,5 +1,5 @@
 import { useLayoutEffect, useRef, useState } from "react";
-import { Box, Heading, Card, Button, Skeleton, SkeletonText } from "@chakra-ui/react";
+import { Box, Heading, Card, Button, Skeleton } from "@chakra-ui/react";
 import { useAtom } from "jotai";
 import { currentSurahAtom, showSurahNavigatorAtom } from "@/atoms/surahNavigatorState";
 import { surahsState } from "@/atoms/surahsState";
@@ -80,7 +80,7 @@ function QuranPage() {
                     {/* Dummy just used for spacing */}
                     <Button
                         opacity={0}
-                        _hover={{ cursor: "default" }}
+                        _hover={{ cursor: "default"}}
                         lg={{ display: "none" }}
                     >
                         All Surahs
