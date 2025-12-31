@@ -93,7 +93,7 @@ function QuranPage() {
                             justifyContent="center"
                             alignItems="center"
                         >
-                            <SkeletonText noOfLines={1} h={11} w={250} />
+                            <SkeletonText noOfLines={1} h={11} w={"7rem"} lg={{ width: "14rem" }}/>
                         </Box>
                     </Box>
 
