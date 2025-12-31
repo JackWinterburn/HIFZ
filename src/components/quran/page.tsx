@@ -55,7 +55,7 @@ function QuranPage() {
                     backdropFilter={"blur(10px)"}
                     zIndex={surahLoading? 0 : 1}
                     display={showSurahNavigator? "none" : "flex"}
-                    lg={{ justifyContent: "center", paddingBottom: "3.4rem"}}
+                    lg={{ justifyContent: "center", paddingBottom: "1rem"}}
                 >
                     <Button
                         variant={"surface"}
@@ -70,31 +70,11 @@ function QuranPage() {
                     
                     <Box position="relative" flex={1} display="flex" justifyContent="center" alignItems="center">
                         <Heading
-                            size="4xl"
-                            position="absolute"
-                            left="50%"
-                            top="0%"
-                            transition="opacity 300ms ease, transform 300ms ease"
-                            opacity={surahLoading ? 0 : 1}
-                            transform={surahLoading ? "translate(-50%,0)" : "translate(-50%,0)"}
-                            style={{ whiteSpace: 'nowrap', transformOrigin: 'center' }}
+                            size="3xl"
+                            lg={{ fontSize: "2.8rem"}}
                         >
                             {surahs.find(surah => surah.number === currentSurah)?.surahNameArabic}
                         </Heading>
-
-                        <Box
-                            position="absolute"
-                            left="50%"
-                            top="0%"
-                            transition="opacity 300ms ease, transform 300ms ease"
-                            opacity={surahLoading ? 1 : 0}
-                            transform={surahLoading ? "translate(-50%,0)" : "translate(-50%,0)"}
-                            display="flex"
-                            justifyContent="center"
-                            alignItems="center"
-                        >
-                            <SkeletonText noOfLines={1} h={11} w={"7rem"} lg={{ width: "14rem" }}/>
-                        </Box>
                     </Box>
 
                     {/* Dummy just used for spacing */}
