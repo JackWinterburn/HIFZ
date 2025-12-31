@@ -44,19 +44,18 @@ function QuranPage() {
                 lg={{ w: "60vw" }}
             >
                 <Card.Header
-                    display={"flex"}
                     flexDir={"row"}
                     justifyContent={"space-between"}
-                    p={"1rem"}
-                    pb={61}
+                    p={"1.4rem"}
                     borderBottomWidth={1}
                     boxShadow={"0px 8px 14px #0000001a"}
                     position="sticky"
                     top={0}
                     bgColor={"whiteAlpha.700"}
                     backdropFilter={"blur(10px)"}
-                    zIndex={surahLoading? 0 : 3}
-                    lg={{ justifyContent: "center" }}
+                    zIndex={surahLoading? 0 : 1}
+                    display={showSurahNavigator? "none" : "flex"}
+                    lg={{ justifyContent: "center", paddingBottom: "3.4rem"}}
                 >
                     <Button
                         variant={"surface"}
@@ -74,7 +73,7 @@ function QuranPage() {
                             size="4xl"
                             position="absolute"
                             left="50%"
-                            top="50%"
+                            top="0%"
                             transition="opacity 300ms ease, transform 300ms ease"
                             opacity={surahLoading ? 0 : 1}
                             transform={surahLoading ? "translate(-50%,0)" : "translate(-50%,0)"}
