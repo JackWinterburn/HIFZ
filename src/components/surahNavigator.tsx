@@ -1,21 +1,40 @@
 import { useLayoutEffect } from "react";
 import { getSurahs } from "@/api/getSurahs";
 import { surahsState } from "@/atoms/surahsState";
-import { currentSurahAtom, showSurahNavigatorAtom } from "@/atoms/surahNavigatorState";
+import { currentSurahAtom, showSurahNavigatorAtom, surahCheckboxesAtom } from "@/atoms/surahNavigatorState";
+import { memorisedAyatAtom } from "@/atoms/memorisedState";
 import { useAtom } from "jotai";
-import { Box, Button, Flex, Heading, Stack, Text } from "@chakra-ui/react";
+import { Box, Button, Flex, Heading, Stack, Text, Checkbox } from "@chakra-ui/react";
+import { getAyat } from "@/api/getAyat";
 
 function SurahNavigator() {
     const [surahs, setSurahs] = useAtom(surahsState);
+    const [surahCheckboxes, setSurahCheckboxes] = useAtom(surahCheckboxesAtom);
+    const [, setMemorisedAyat] = useAtom(memorisedAyatAtom);
     const [showSurahNavigator, setShowSurahNavigator] = useAtom(
         showSurahNavigatorAtom
     );
     const [currentSurah, setCurrentSurah] = useAtom(currentSurahAtom);
 
+    const setAllAyatAsMemorisedInSurah = async (surahNum: number) => {
+        const response = await getAyat(surahNum);
+        setMemorisedAyat((prev) => {
+            const updated = {...prev};
+            response.forEach((ayah: any) => {
+                updated[`${surahNum}:${ayah.ayahNumber}`] = {
+                    surahNumber: surahNum,
+                    ayahNumber: ayah.ayahNumber,
+                    arabicText: ayah.arabicText
+                };
+            });
+
+            return updated;
+        })
+    }
+
     useLayoutEffect(() => {
         async function loadSurahs() {
             const response = await getSurahs();
-            console.log(response);
             let s = response;
             s.forEach((surah: any, idx: number) => {
                 surah.number = idx + 1;
@@ -24,6 +43,8 @@ function SurahNavigator() {
         }
         loadSurahs();
     }, []);
+
+    // console.log(Array.from({ length: surahs[0].totalAyah }, (_, i) => `${surahs[0].number}:${i + 1}`));
 
     return (
         <Box
@@ -49,16 +70,13 @@ function SurahNavigator() {
                 justifyContent="space-between"
                 borderBottomWidth={1}
                 p={"1.4rem"}
+                zIndex={3}
                 position="sticky"
                 top={0}
                 bgColor={"Background"}
                 boxShadow={"0px 8px 14px #0000001a"}
                 lg={{ bgColor: "whiteAlpha.700", backdropFilter: "blur(10px)" }}
             >
-                <Heading size="2xl" opacity={0} lg={{ display: "none" }}>
-                    Surahs
-                </Heading>
-                <Heading size="2xl">Surahs</Heading>
                 <Button
                     variant={"surface"}
                     lg={{ display: "none" }}
@@ -66,6 +84,10 @@ function SurahNavigator() {
                 >
                     Return
                 </Button>
+                <Heading size="2xl">Surahs</Heading>
+                <Heading size="2xl" opacity={0} lg={{ display: "none" }}>
+                    Surahs
+                </Heading>
             </Flex>
             <Stack gap={0}>
                 {surahs.map((surah, idx) => (
@@ -87,7 +109,45 @@ function SurahNavigator() {
                             cursor: "pointer",
                         }}
                     >
+                        <Flex
+                            flexDir={"row"}
+                            gapX={2}
+                        >
+                        <Checkbox.Root 
+                            value={surah.number.toString()} 
+                            onClick={(e) => e.stopPropagation()} 
+                            onCheckedChange={(e) => {
+                                if(e.checked){
+                                    setAllAyatAsMemorisedInSurah(surah.number);
+                                    setSurahCheckboxes((prev) => ({
+                                        ...prev,
+                                        [surah.number]: true
+                                    }) );
+                                } else {
+                                    setMemorisedAyat((prev) => {
+                                        const updated = {...prev}
+                                        const ayatList = Array.from({ length: surah.totalAyah }, (_, i) => `${surah.number}:${i + 1}`)
+                                        ayatList.forEach(ayahKey => {
+                                            if(updated[ayahKey]) {
+                                                delete updated[ayahKey];
+                                            }
+                                        })
+                                        return updated;
+                                    })
+                                    
+                                    setSurahCheckboxes((prev) => ({
+                                        ...prev,
+                                        [surah.number]: false
+                                    }) );
+                                }
+                            }}
+                            checked={surahCheckboxes[surah.number]}>
+                            <Checkbox.HiddenInput />
+                            <Checkbox.Control/>
+                        </Checkbox.Root>
+
                         <Text>{surah.number}. {surah.surahName}</Text>
+                        </Flex>
                     </Box>
                 ))}
             </Stack>

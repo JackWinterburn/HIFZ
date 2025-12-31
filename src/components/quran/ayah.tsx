@@ -1,17 +1,27 @@
 import { Box, Text, Stack } from "@chakra-ui/react";
 import { type AyahType } from "@/types/quranPage";
 import { memorisedAyatAtom } from "@/atoms/memorisedState";
+import { surahsState } from "@/atoms/surahsState";
+import { surahCheckboxesAtom } from "@/atoms/surahNavigatorState";
 import { LocaleProvider } from "@chakra-ui/react";
 import { useAtom } from "jotai";
 
 function Ayah({ arabicText, latinText, ayahNumber, surahNumber }: AyahType) {
     const [memorisedAyat, setMemorisedAyat] = useAtom(memorisedAyatAtom);
+    const [,  setSurahCheckboxes] = useAtom(surahCheckboxesAtom);
+    const [surahs, ] = useAtom(surahsState);
 
     const ayahIsMemorised = (ayahKey: string) => {
         return Object.keys(memorisedAyat).includes(ayahKey);
     };
 
     const hoverBgColor = ayahIsMemorised(`${surahNumber}:${ayahNumber}`) ? "#a6efb0ff" : "#0000000b";
+
+    const checkSurahFullyMemorised = (surahNum: number) => {
+        const totalAyah = surahs.find(surah => surah.number === surahNum)?.totalAyah || 0;
+        const memorisedCount = Object.keys(memorisedAyat).filter(key => key.startsWith(`${surahNum}:`)).length;
+        return memorisedCount+1 === totalAyah;
+    }
 
     return (
         <Box
@@ -28,13 +38,26 @@ function Ayah({ arabicText, latinText, ayahNumber, surahNumber }: AyahType) {
                         surahNumber,
                         arabicText
                     }});
+
+                    if(checkSurahFullyMemorised(surahNumber)) {
+                        setSurahCheckboxes((prev) => ({
+                            ...prev,
+                            [surahNumber]: true
+                        }));
+                    }
                 } else {
                     setMemorisedAyat((prev: any) => {
                         const updated = {...prev};
                         delete updated[`${surahNumber}:${ayahNumber}`];
                         return updated;
                     });
-                }
+
+                    if(!checkSurahFullyMemorised(surahNumber)) {
+                        setSurahCheckboxes((prev) => ({
+                            ...prev,
+                            [surahNumber]: false
+                        }));
+                }}
             }}
         >
             <Stack>
