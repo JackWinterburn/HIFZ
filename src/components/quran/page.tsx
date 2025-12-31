@@ -85,7 +85,7 @@ function QuranPage() {
                         <Box
                             position="absolute"
                             left="50%"
-                            top="50%"
+                            top="0%"
                             transition="opacity 300ms ease, transform 300ms ease"
                             opacity={surahLoading ? 1 : 0}
                             transform={surahLoading ? "translate(-50%,0)" : "translate(-50%,0)"}
