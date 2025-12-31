@@ -53,7 +53,7 @@ function SurahNavigator() {
             overflowY="scroll"
             bgColor={"whiteAlpha.700"}
             backdropFilter={"blur(10px)"}
-            display={showSurahNavigator ? "block" : "none"}
+            display={showSurahNavigator ? "absolute" : "none"}
             pointerEvents={showSurahNavigator ? "auto" : "none"}
             zIndex={2}
             position={{ base: "absolute", lg: "relative" }}
