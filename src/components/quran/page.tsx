@@ -21,8 +21,10 @@ function QuranPage() {
 
     const loadSurah = async () => {
         const response = await getAyat(currentSurah);
-        setAyat(response);
-        setSurahLoading(false);
+        setTimeout(() => {
+            setAyat(response)
+            setSurahLoading(false)
+        }, 150);
     }
         
     useLayoutEffect(() => {
