@@ -1,7 +1,10 @@
 import { useLayoutEffect, useRef, useState } from "react";
 import { Box, Heading, Card, Button, Skeleton } from "@chakra-ui/react";
 import { useAtom } from "jotai";
-import { currentSurahAtom, showSurahNavigatorAtom } from "@/atoms/surahNavigatorState";
+import {
+    currentSurahAtom,
+    showSurahNavigatorAtom,
+} from "@/atoms/surahNavigatorState";
 import { surahsState } from "@/atoms/surahsState";
 import { ayatAtom } from "@/atoms/ayatState";
 import { getAyat } from "@/api/getAyat";
@@ -9,11 +12,11 @@ import Ayah from "./ayah";
 import type { ayahType } from "@/types/ayah";
 
 function QuranPage() {
-    const [currentSurah, ] = useAtom(currentSurahAtom);
+    const [currentSurah] = useAtom(currentSurahAtom);
     const [showSurahNavigator, setShowSurahNavigator] = useAtom(
         showSurahNavigatorAtom
     );
-    const [surahs, ] = useAtom(surahsState);
+    const [surahs] = useAtom(surahsState);
     const [ayat, setAyat] = useAtom(ayatAtom);
     const [surahLoading, setSurahLoading] = useState(false);
 
@@ -22,11 +25,11 @@ function QuranPage() {
     const loadSurah = async () => {
         const response = await getAyat(currentSurah);
         setTimeout(() => {
-            setAyat(response)
-            setSurahLoading(false)
+            setAyat(response);
+            setSurahLoading(false);
         }, 150);
-    }
-        
+    };
+
     useLayoutEffect(() => {
         setSurahLoading(true);
         // Reset scroll to top immediately when surah changes
@@ -55,9 +58,9 @@ function QuranPage() {
                     top={0}
                     bgColor={"whiteAlpha.700"}
                     backdropFilter={"blur(10px)"}
-                    zIndex={surahLoading? 0 : 1}
-                    display={showSurahNavigator? "none" : "flex"}
-                    lg={{ justifyContent: "center", paddingBottom: "1rem"}}
+                    zIndex={surahLoading ? 0 : 1}
+                    display={showSurahNavigator ? "none" : "flex"}
+                    lg={{ justifyContent: "center", paddingBottom: "1rem" }}
                 >
                     <Button
                         variant={"surface"}
@@ -69,20 +72,26 @@ function QuranPage() {
                         All Surahs
                     </Button>
 
-                    
-                    <Box position="relative" flex={1} display="flex" justifyContent="center" alignItems="center">
-                        <Heading
-                            size="3xl"
-                            lg={{ fontSize: "2.8rem"}}
-                        >
-                            {surahs.find(surah => surah.number === currentSurah)?.surahNameArabic}
+                    <Box
+                        position="relative"
+                        flex={1}
+                        display="flex"
+                        justifyContent="center"
+                        alignItems="center"
+                    >
+                        <Heading size="3xl" lg={{ fontSize: "2.8rem" }}>
+                            {
+                                surahs.find(
+                                    (surah) => surah.number === currentSurah
+                                )?.surahNameArabic
+                            }
                         </Heading>
                     </Box>
 
                     {/* Dummy just used for spacing */}
                     <Button
                         opacity={0}
-                        _hover={{ cursor: "default"}}
+                        _hover={{ cursor: "default" }}
                         lg={{ display: "none" }}
                     >
                         All Surahs
@@ -115,8 +124,15 @@ function QuranPage() {
                         opacity={surahLoading ? 1 : 0}
                         pointerEvents={surahLoading ? "auto" : "none"}
                     >
-                        {[1,2,3,4,5].map((_, idx) => (
-                            <Skeleton key={idx} m={7}  h={140} p={4} mb={6} borderRadius={"none"} />
+                        {[1, 2, 3, 4, 5].map((_, idx) => (
+                            <Skeleton
+                                key={idx}
+                                m={7}
+                                h={140}
+                                p={4}
+                                mb={6}
+                                borderRadius={"none"}
+                            />
                         ))}
                     </Box>
                 </Card.Body>
@@ -124,7 +140,7 @@ function QuranPage() {
                 <Card.Footer></Card.Footer>
             </Card.Root>
         </Box>
-    )
+    );
 }
 
 export default QuranPage;
