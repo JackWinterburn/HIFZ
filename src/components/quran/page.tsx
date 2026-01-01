@@ -44,6 +44,7 @@ function QuranPage() {
             <Card.Root
                 ref={cardRef}
                 h={"100vh"}
+                pb={"5rem"}
                 overflowY={"scroll"}
                 w={"100vw"}
                 lg={{ w: "60vw" }}
