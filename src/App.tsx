@@ -100,7 +100,7 @@ function App() {
                                     of 6,236 ayat. */}
                                                 </Heading>
                                                 <Heading
-                                                    size={"6xl"}
+                                                    size={"5xl"}
                                                     mb={"1rem"}
                                                 >
                                                     {(
