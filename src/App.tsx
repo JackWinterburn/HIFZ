@@ -86,7 +86,7 @@ function App() {
                                     <Dialog.Backdrop />
 
                                     <Dialog.Positioner>
-                                        <Dialog.Content>
+                                        <Dialog.Content overflowY={"scroll"}>
                                             <Dialog.Body
                                                 textAlign={"center"}
                                                 p={"3rem"}
@@ -146,6 +146,7 @@ function App() {
                                                 >
                                                     <Stat.Root
                                                         maxW="240px"
+                                                        minW="210px"
                                                         borderWidth="1px"
                                                         p="4"
                                                         rounded="md"
@@ -185,6 +186,7 @@ function App() {
 
                                                     <Stat.Root
                                                         maxW="240px"
+                                                        minW="210px"
                                                         borderWidth="1px"
                                                         p="4"
                                                         rounded="md"

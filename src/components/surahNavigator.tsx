@@ -89,7 +89,7 @@ function SurahNavigator() {
                     Surahs
                 </Heading>
             </Flex>
-            <Stack gap={0}>
+            <Stack gap={0} pb={"3rem"}>
                 {surahs.map((surah, idx) => (
                     <Box
                         key={idx}
@@ -114,6 +114,8 @@ function SurahNavigator() {
                             gapX={2}
                         >
                         <Checkbox.Root 
+                            size={"lg"}
+                            my={"auto"}
                             value={surah.number.toString()} 
                             onClick={(e) => e.stopPropagation()} 
                             onCheckedChange={(e) => {
